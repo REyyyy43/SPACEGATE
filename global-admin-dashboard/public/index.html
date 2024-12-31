@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprehensive Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+
+    <!-- Header Section -->
+    <header class="bg-white shadow-md p-4 flex items-center justify-between">
+        <div class="text-lg font-bold text-blue-600">Company Logo</div>
+        <div class="flex-grow max-w-lg mx-auto">
+            <input
+                type="text"
+                placeholder="Search..."
+                class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+                id="search-input"
+                onkeyup="search()"
+            />
+        </div>
+        <div class="flex items-center space-x-4">
+            <button class="text-gray-600 hover:text-blue-600">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M10 2a6 6 0 016 6v4l1 2v1H3v-1l1-2V8a6 6 0 016-6zm-7 12h14v1H3v-1z" />
+                </svg>
+            </button>
+            <img src="https://via.placeholder.com/40" alt="User Avatar" class="h-10 w-10 rounded-full border">
+        </div>
+    </header>
+
+    <div class="flex">
+        <!-- Sidebar Navigation -->
+        <aside class="w-64 bg-gray-800 text-white min-h-screen">
+            <nav class="space-y-4 p-4">
+                <a href="#" class="block py-2 px-4 bg-gray-900 rounded-lg">Dashboard Overview</a>
+                <a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded-lg">Messaging</a>
+                <a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded-lg">Rentals</a>
+                <a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded-lg">Maintenance Requests</a>
+                <a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded-lg">Task Management</a>
+                <a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded-lg">Tenant Information</a>
+                <a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded-lg">Event Calendar</a>
+                <a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded-lg">Reports & Analytics</a>
+                <a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded-lg">Audit & Notifications</a>
+                <a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded-lg">Settings</a>
+            </nav>
+        </aside>
+
+        <!-- Main Dashboard -->
+        <main class="flex-1 p-6 space-y-6">
+            <!-- Building Management Overview -->
+            <section>
+                <h2 class="text-xl font-semibold text-gray-700">Building Management Overview</h2>
+                <div class="grid grid-cols-4 gap-4 mt-4">
+                    <div class="p-4 bg-white shadow rounded-lg">
+                        <h3 class="text-gray-500">Total Buildings</h3>
+                        <input type="number" class="text-2xl font-bold text-gray-700 w-full" id="total-buildings"></input>
+                    </div>
+                    <div class="p-4 bg-white shadow rounded-lg">
+                        <h3 class="text-gray-500">Occupancy Rate</h3>
+                        <input type="number" class="text-2xl font-bold text-gray-700 w-full" id="occupancy-rate"></input>
+                    </div>
+                    <div class="p-4 bg-white shadow rounded-lg">
+                        <h3 class="text-gray-500">Total Units</h3>
+                        <input type="number" class="text-2xl font-bold text-gray-700 w-full" id="total-units"></input>
+                    </div>
+                </div>
+
+                <!-- Charts and Heatmap Section -->
+                <div class="grid grid-cols-3 gap-4 mt-4">
+                    <div class="p-4 bg-white shadow rounded-lg">
+                        <canvas id="barChart"></canvas>
+                    </div>
+                    <div class="p-4 bg-white shadow rounded-lg">
+                        <canvas id="pieChart"></canvas>
+                    </div>
+                    <div class="p-4 bg-white shadow rounded-lg">
+                        <div class="grid grid-cols-5 gap-1">
+                            <!-- Heatmap cells -->
+                            <div class="bg-red-500 h-8"></div>
+                            <div class="bg-yellow-500 h-8"></div>
+                            <div class="bg-green-500 h-8"></div>
+                            <div class="bg-blue-500 h-8"></div>
+                            <div class="bg-purple-500 h-8"></div>
+                            <!-- Repeat as needed for more cells -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Maintenance Requests Section -->
+            <section>
+                <h2 class="text-xl font-semibold text-gray-700">Maintenance Requests</h2>
+                <div class="grid grid-cols-3 gap-4">
+                    <div class="p-4 bg-white shadow rounded-lg">
+                        <h3 class="text-gray-500">Open Requests</h3>
+                        <input type="number" class="text-2xl w-full font-bold text-gray-700" id="open-requests"></input>
+                    </div>
+                    <div class="p-4 bg-white shadow rounded-lg">
+                        <h3 class="text-gray-500">In Progress</h3>
+                        <input type="number" class="text-2xl w-full font-bold text-gray-700" id="in-progress"></input>
+                    </div>
+                    <div class="p-4 bg-white shadow rounded-lg">
+                        <h3 class="text-gray-500">Resolved</h3>
+                        <input type="number" class="text-2xl w-full font-bold text-gray-700" id="resolved"></input>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Admin Management Section -->
+            <section>
+                <h2 class="text-xl font-semibold text-gray-700">Admin Management</h2>
+                <div class="bg-white p-4 shadow rounded-lg mt-4">
+                    <h3 class="text-gray-500">Add Admin</h3>
+                    <div class="space-y-4 mt-4">
+                        <input type="text" id="admin-name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300" placeholder="Admin Name" />
+                        <input type="email" id="admin-email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300" placeholder="Admin Email" />
+                        <input type="password" id="admin-password" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300" placeholder="Admin Password" />
+                        <button onclick="addAdmin()" class="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Add Admin</button>
+                    </div>
+                </div>
+
+                <!-- Admin List -->
+                <h3 class="text-gray-500 mt-6">Current Admins</h3>
+                <div id="admin-list" class="mt-4">
+                    <!-- Admins will be listed here -->
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="text-gray-500 mt-10">
+                <div class="flex justify-between">
+                    <div>
+                        <a href="#" class="hover:underline">Privacy Policy</a> | 
+                        <a href="#" class="hover:underline">Terms</a> | 
+                        <a href="#" class="hover:underline">Support</a>
+                    </div>
+                    <p>&copy; 2024 Company Name. All rights reserved.</p>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        // Function to add an admin
+        function addAdmin() {
+            const name = document.getElementById('admin-name').value;
+            const email = document.getElementById('admin-email').value;
+            const password = document.getElementById('admin-password').value;
+            if(name && email && password) {
+                const adminList = document.getElementById('admin-list');
+                const adminDiv = document.createElement('div');
+                adminDiv.className = 'flex justify-between items-center bg-gray-100 p-4 rounded-lg shadow mb-2';
+                adminDiv.innerHTML = `
+                <div>
+                    <div class="text-gray-700"><h1 class="font-bold">${name}</h1> (${email})</div>
+                    <div class="text-gray-500">Password: ${password}</div>
+                </div>
+                `;
+                adminList.appendChild(adminDiv);
+                // Clear input fields after adding
+                document.getElementById('admin-name').value = '';
+                document.getElementById('admin-email').value = '';
+                document.getElementById('admin-password').value = '';
+            } else {
+                alert('Please fill in all fields');
+            }
+        }
+
+       
+
+        // Bar Chart
+        const barCtx = document.getElementById('barChart').getContext('2d');
+        new Chart(barCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Building 1', 'Building 2', 'Building 3'],
+                datasets: [{
+                    label: 'Occupancy',
+                    data: [75, 85, 90],
+                    backgroundColor: ['rgba(75, 192, 192, 0.2)'],
+                    borderColor: ['rgba(75, 192, 192, 1)'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Pie Chart
+        const pieCtx = document.getElementById('pieChart').getContext('2d');
+        new Chart(pieCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Rented', 'Vacant'],
+                datasets: [{
+                    data: [150, 70],
+                    backgroundColor: ['rgba(54, 162, 235, 0.2)', 'rgba(255, 99, 132, 0.2)'],
+                    borderColor: ['rgba(54, 162, 235, 1)', 'rgba(255, 99, 132, 1)'],
+                    borderWidth: 1
+                }]
+            }
+        });
+    </script>
+
+</body>
+</html>
+
+
+
+
+

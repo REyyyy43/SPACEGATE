@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "target": "esnext",                               // Allows modern JavaScript features
+    "module": "esnext",                               // Supports ES Modules
+    "strict": true,                                   // Enforces strict type-checking
+    "jsx": "preserve",                                // JSX support (if needed)
+    "moduleResolution": "node",                      // Resolves modules like Node.js
+    "experimentalDecorators": true,                  // Enables decorator support
+    "allowJs": true,                                  // Allows JavaScript files
+    "skipLibCheck": true,                             // Skips library type checks
+    "esModuleInterop": true,                          // Compatibility with CommonJS modules
+    "resolveJsonModule": true,                        // Enables importing JSON files
+    "allowSyntheticDefaultImports": true,            // Allows default imports in modules
+    "forceConsistentCasingInFileNames": true,         // Enforces consistent file naming
+    "useDefineForClassFields": true,                 // Aligns with Vue 3's class fields
+    "sourceMap": true,                                // Generates source maps for debugging
+    "baseUrl": ".",                                   // Sets base directory for module resolution
+    "types": ["webpack-env"],                         // Includes Webpack environment types
+    "paths": {                                        // Path aliasing
+      "@/*": ["src/*"],
+      "@/amplify/*": ["../../amplify/*"]
+    },
+    "lib": [                                          // JavaScript environment libraries
+      "esnext",
+      "dom",
+      "dom.iterable",
+      "scripthost"
+    ]
+  },
+  "include": [                                        // Includes these files for compilation
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "tests/**/*.ts",
+    "tests/**/*.tsx"
+  ],
+  "exclude": [                                        // Excludes these files from compilation
+    "node_modules"
+  ]
+}
